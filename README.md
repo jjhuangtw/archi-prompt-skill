@@ -30,7 +30,7 @@ open by pinning down what must not change.*
 
 `建築外觀 Exterior` · `文生圖 Text-to-image` · `Grok`
 
-<img src="https://archi-prompt.com/uploads/gen-0aa4b2e3.webp" width="62%" alt="Tadao Ando style concrete museum with a slit skylight and reflecting pool">
+<img src="https://archi-prompt.com/uploads/gen-0aa4b2e3.webp" width="300" alt="Tadao Ando style concrete museum with a slit skylight and reflecting pool">
 
 ```
 Art museum in the style of Tadao Ando, smooth exposed concrete volumes, a long slit
@@ -45,7 +45,7 @@ entrance, single cherry tree, misty dawn, serene photorealistic photography
 
 `建築外觀 Exterior` · `文生圖 Text-to-image` · `GPT Image`
 
-![Zaha Hadid style performing arts center with fluid white shell at dusk](https://archi-prompt.com/uploads/gen-ff378a3a.webp)
+<img src="https://archi-prompt.com/uploads/gen-ff378a3a.webp" width="480" alt="Zaha Hadid style performing arts center with fluid white shell at dusk">
 
 ```
 Performing arts center in the style of Zaha Hadid, fluid white curvilinear shell flowing
@@ -60,7 +60,7 @@ warm interior glow, aerial three-quarter view, photorealistic rendering
 
 `建築外觀 Exterior` · `文生圖 Text-to-image` · `Grok`
 
-![Renovated Taiwanese narrow townhouse with perforated brick screen facade on a rainy evening](https://archi-prompt.com/uploads/gen-6a16d579.webp)
+<img src="https://archi-prompt.com/uploads/gen-6a16d579.webp" width="480" alt="Renovated Taiwanese narrow townhouse with perforated brick screen facade on a rainy evening">
 
 ```
 Renovated narrow townhouse facade in a dense Taiwanese street, weathered neighbors on both
@@ -76,7 +76,7 @@ photography, hyperrealistic, nostalgic yet contemporary mood
 
 `修圖 Retouch` · `Nano Banana` · 站上最多人複製的一則 / most-copied prompt on the site
 
-![Photoreal architectural photography converted from a SketchUp white model](https://archi-prompt.com/uploads/gen-780867a0.webp)
+<img src="https://archi-prompt.com/uploads/gen-780867a0.webp" width="480" alt="Photoreal architectural photography converted from a SketchUp white model">
 
 ```
 將這張 SketchUp 白模截圖轉換成擬真建築攝影:保持建築量體、開窗位置與視角完全不變,
@@ -91,7 +91,7 @@ photography, hyperrealistic, nostalgic yet contemporary mood
 
 `室內設計 Interior` · `文生圖 Text-to-image` · `GPT Image`
 
-![Wabi-sabi country living room with lime-washed walls and oak beams](https://archi-prompt.com/uploads/gen-43cd5a79.webp)
+<img src="https://archi-prompt.com/uploads/gen-43cd5a79.webp" width="480" alt="Wabi-sabi country living room with lime-washed walls and oak beams">
 
 ```
 Country house living room designed by Axel Vervoordt, lime-washed textured walls,
@@ -106,7 +106,7 @@ soft window light with painterly shadows, quiet timeless atmosphere, fine art ph
 
 `景觀設計 Landscape` · `文生圖 Text-to-image` · `GPT Image`
 
-![Meadow-style public garden with ornamental grasses in golden autumn backlight](https://archi-prompt.com/uploads/gen-5ae02baf.webp)
+<img src="https://archi-prompt.com/uploads/gen-5ae02baf.webp" width="480" alt="Meadow-style public garden with ornamental grasses in golden autumn backlight">
 
 ```
 Public garden designed by Piet Oudolf, drifts of ornamental grasses and echinacea seed
@@ -128,12 +128,8 @@ frost on textures, immersive naturalistic garden photography
 </tr>
 </table>
 
-站上四千多則都可以用公開 API 查,skill 會在題材有現成案例時自己去撈一則當骨架。
-*All 4,000+ are queryable through the public API, and the skill fetches one as a skeleton whenever your subject already has a close match.*
-
-```bash
-curl -s "https://archi-prompt.com/api/prompts?q=中庭&category=建築外觀&limit=5&brief=1"
-```
+題材如果站上已經有類似的,skill 會撈一則回來當骨架,比從零開始寫快也準。
+*When your subject already has a close match on the site, the skill pulls one back as a skeleton — faster and more accurate than starting from scratch.*
 
 以上提示詞為站上會員投稿,著作權屬原作者,這裡引用作為說明用途。
 *The prompts above were submitted by members of the site and remain theirs; they are quoted here for illustration.*
@@ -147,7 +143,7 @@ curl -s "https://archi-prompt.com/api/prompts?q=中庭&category=建築外觀&lim
 | 大師 | 32 位設計師的語彙(建築師 12、室內 10、景觀 10) |
 | 建築史 | 44 種歷史風格,含風格轉換模板 |
 | 修圖 | SU 模型轉渲染、光線與時間、材質方案比較、視角與圖面轉換 |
-| 實例 | 透過公開 API 查 archi-prompt.com 上四千多則現成提示詞 |
+| 實例 | 需要時到 archi-prompt.com 上四千多則現成提示詞裡找相近的當骨架 |
 
 ## 安裝
 
@@ -187,4 +183,4 @@ cd archi-prompt-skill
 
 [MIT](LICENSE) —— 可自由使用、修改、商業利用。用得上的話,歡迎順手提一下出處 [archi-prompt.com](https://archi-prompt.com)。
 
-站上會員投稿的提示詞不在本 repo 的打包範圍內,這裡只有站方自行整理的方法論與風格字彙。透過 API 查到的內容屬於原作者,請當作參考與骨架,不要整段照抄後宣稱是自己寫的。
+站上會員投稿的提示詞不在本 repo 的打包範圍內,這裡只有站方自行整理的方法論與風格字彙。從站上引用到的內容屬於原作者,請當作參考與骨架,不要整段照抄後宣稱是自己寫的。
