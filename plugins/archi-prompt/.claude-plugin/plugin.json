@@ -1,0 +1,9 @@
+{
+  "name": "archi-prompt",
+  "description": "寫建築、室內、景觀的 AI 生圖與修圖提示詞。Write and fix AI image prompts for architecture, interior, and landscape design — the golden-order method, 34 styles, 32 designers, 44 historical styles, retouching workflows, plus live lookup against archi-prompt.com.",
+  "author": {
+    "name": "jjhuang",
+    "url": "https://archi-prompt.com"
+  },
+  "homepage": "https://archi-prompt.com"
+}
