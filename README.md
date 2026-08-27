@@ -29,16 +29,37 @@
 
 ## 安裝
 
-### 用 plugin 安裝(建議)
+同一份內容包成三種入口,依你用的工具選一個。
+
+### Claude Code
 
 ```
 /plugin marketplace add jjhuangtw/archi-prompt-skill
 /plugin install archi-prompt@archi-prompt
 ```
 
-### 直接複製
+或直接把 `plugins/archi-prompt/skills/archi-prompt/` 整個資料夾放到 `~/.claude/skills/` 底下。
 
-把 `plugins/archi-prompt/skills/archi-prompt/` 整個資料夾放到 `~/.claude/skills/` 底下即可。
+### OpenAI Codex、Gemini CLI 等 CLI agent
+
+把這個 repo clone 下來,在裡面開你的 agent 就行 —— 根目錄的 [AGENTS.md](AGENTS.md)
+是這類工具的通用慣例,它會自動讀。
+
+```bash
+git clone https://github.com/jjhuangtw/archi-prompt-skill.git
+cd archi-prompt-skill
+```
+
+### ChatGPT 的 Custom GPT、Gemini 的 Gem
+
+那兩個產品沒有檔案系統,沒辦法「要用才去讀某一份參考檔」,所以內容攤平成兩個檔案放在
+[portable/](portable/):`instructions.md` 貼進指示欄位,`knowledge.md` 當知識庫上傳。
+設定步驟見 [portable/README.md](portable/README.md)。
+
+---
+
+`portable/` 底下的檔案由 `node scripts/build-portable.mjs` 從 skill 原始檔產生,
+不要直接編輯。改內容請改 `plugins/archi-prompt/skills/archi-prompt/` 之後重新產生。
 
 ## 授權
 
