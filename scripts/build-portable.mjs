@@ -7,7 +7,7 @@
 // 所以得把內容攤平成可以貼上或上傳的形式:
 //
 //   instructions.md  SKILL.md 的本文,貼進 Instructions / 自訂指令欄位
-//   knowledge.md     六份 references 合併,當知識庫上傳
+//   knowledge.md     五份 references 合併,當知識庫上傳
 //
 // 手動維護這兩份一定會跟本體脫節,所以固定用這支腳本重新產生。
 import fs from 'fs';
@@ -38,17 +38,12 @@ const instructions = body
     `- **32 位大師** —— 使用者指名設計師(安藤忠雄、Zaha、隈研吾、巴拉岡、Kelly Wearstler…)\n` +
     `- **44 種建築史風格** —— 需要歷史風格或做風格轉換\n` +
     `- **修圖工作流** —— SU 模型轉渲染、光線與時間、材質方案比較、視角與圖面轉換\n\n`
-  )
-  // 內文其他地方指向 references/ 檔名的句子也要改口,不然使用者會去找不存在的檔案
-  .replace(
-    /細節與更多用法見 `references\/site-api\.md`。/,
-    '細節與更多用法見知識庫裡「查 archi-prompt.com 的公開 API」那一節。'
   );
 
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, 'instructions.md'), banner('SKILL.md') + instructions, 'utf8');
 
-const ORDER = ['method.md', 'styles.md', 'designers.md', 'history.md', 'retouching.md', 'site-api.md'];
+const ORDER = ['method.md', 'styles.md', 'designers.md', 'history.md', 'retouching.md'];
 const parts = ORDER.map((f) => {
   const text = fs.readFileSync(path.join(SKILL, 'references', f), 'utf8').trim();
   // 每份 reference 的標題整層降一級,合併之後才有單一的文件層級:
@@ -69,7 +64,6 @@ const knowledge =
     'designers.md': '32 位設計師語彙',
     'history.md': '44 種建築史風格',
     'retouching.md': '修圖工作流',
-    'site-api.md': '查 archi-prompt.com 的公開 API',
   }[f]}`).join('\n') +
   '\n\n---\n\n' +
   parts.join('\n\n---\n\n') +

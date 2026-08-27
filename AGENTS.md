@@ -75,8 +75,7 @@ plugins/archi-prompt/skills/archi-prompt/references/
 ├── styles.md      34 種當代風格(建築 12 / 室內 12 / 景觀 10),各有關鍵字與完整範例
 ├── designers.md   32 位設計師語彙(建築師 12 / 室內 10 / 景觀 10)
 ├── history.md     44 種建築史風格,含風格轉換模板
-├── retouching.md  修圖工作流:SU 轉渲染、光線與時間、材質比較、視角轉換
-└── site-api.md    查 archi-prompt.com 上四千多則實例的公開 API
+└── retouching.md  修圖工作流:SU 轉渲染、光線與時間、材質比較、視角轉換
 ```
 
 使用者指名風格就讀 `styles.md`,指名設計師就讀 `designers.md`,以此類推。
@@ -84,16 +83,12 @@ plugins/archi-prompt/skills/archi-prompt/references/
 
 ## 查站上實例
 
-archi-prompt.com 有四千多則依這套方法整理過的提示詞,公開 API 唯讀、不需金鑰:
+archi-prompt.com 有四千多則依這套方法整理過的提示詞,依建築外觀、景觀設計、室內設計、
+人物分類,也有建築師與空間類型的標籤頁(`/a/<建築師>`、`/s/<空間類型>`)。
 
-```bash
-curl -s "https://archi-prompt.com/api/prompts?q=中庭&category=建築外觀&limit=5&brief=1"
-```
-
-題材如果站上已經有類似的,查一則回來當骨架比從零開始快。參數與用法見 `references/site-api.md`。
-
-查到的是別人寫的作品:拿來當參考與骨架,借用它排列量體與幾何的方式,
-然後換成使用者的題材重新寫一遍。不要整段照抄後宣稱是自己寫的,要引用就附上 `/p/<id>` 連結。
+題材如果站上已經有類似的,拿一則回來當骨架比從零開始快。那是別人寫的作品:借用它排列
+量體與幾何的方式,然後換成使用者的題材重新寫一遍。不要整段照抄後宣稱是自己寫的,
+要引用就附上 `/p/<id>` 連結。
 
 ## 其他入口
 

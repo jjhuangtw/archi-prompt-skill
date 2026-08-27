@@ -12,7 +12,7 @@ ChatGPT 的 Custom GPT 與 Gemini 的 Gem 沒有這個能力 —— 它們只有
 | 檔案 | 放哪裡 | 大小 |
 |---|---|---|
 | `instructions.md` | 貼進 Instructions / 自訂指令欄位 | 約 4 KB,在 Custom GPT 的 8000 字元上限內 |
-| `knowledge.md` | 當檔案上傳到知識庫 | 約 63 KB,六份參考資料合併 |
+| `knowledge.md` | 當檔案上傳到知識庫 | 約 61 KB,五份參考資料合併 |
 
 ## ChatGPT — 建立 Custom GPT
 
@@ -22,7 +22,7 @@ ChatGPT 的 Custom GPT 與 Gemini 的 Gem 沒有這個能力 —— 它們只有
 4. **說明**:寫建築、室內、景觀的 AI 生圖與修圖提示詞
 5. **指示**:把 `instructions.md` 的**全部內容**貼進去(開頭的 HTML 註解可以留著,不影響)
 6. **知識**:上傳 `knowledge.md`
-7. **功能**:留著「網頁瀏覽」,查 archi-prompt.com 的 API 時用得到;不需要 DALL·E 與程式碼執行
+7. **功能**:留著「網頁瀏覽」,要上 archi-prompt.com 找實例時用得到;不需要 DALL·E 與程式碼執行
 8. 儲存 → 右上角選 **公開連結** 或 **僅限自己**
 
 ## Gemini — 建立 Gem
