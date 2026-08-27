@@ -131,9 +131,6 @@ frost on textures, immersive naturalistic garden photography
 題材如果站上已經有類似的,skill 會撈一則回來當骨架,比從零開始寫快也準。
 *When your subject already has a close match on the site, the skill pulls one back as a skeleton — faster and more accurate than starting from scratch.*
 
-以上提示詞為站上會員投稿,著作權屬原作者,這裡引用作為說明用途。
-*The prompts above were submitted by members of the site and remain theirs; they are quoted here for illustration.*
-
 ## 內容
 
 | | |
