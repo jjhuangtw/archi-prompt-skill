@@ -63,6 +63,6 @@ cd archi-prompt-skill
 
 ## 授權
 
-內容採 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant) —— 可自由使用、修改、商業利用,請保留出處連結到 archi-prompt.com。
+[MIT](LICENSE) —— 可自由使用、修改、商業利用。用得上的話,歡迎順手提一下出處 [archi-prompt.com](https://archi-prompt.com)。
 
-站上會員投稿的提示詞不在本 skill 的打包範圍內;skill 只包含站方自行整理的方法論與風格字彙。透過 API 查到的內容屬於原作者,請當作參考與骨架,不要整段照抄後宣稱是自己寫的。
+站上會員投稿的提示詞不在本 repo 的打包範圍內,這裡只有站方自行整理的方法論與風格字彙。透過 API 查到的內容屬於原作者,請當作參考與骨架,不要整段照抄後宣稱是自己寫的。
