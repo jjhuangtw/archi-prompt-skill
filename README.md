@@ -16,95 +16,127 @@
 
 修圖則是另一套邏輯:重點不是「要改什麼」,而是明寫**「什麼必須保持不變」**,否則模型會順手把樓層數與拍攝角度一起重畫。
 
-## 實際案例 Examples
+## 範例 Examples
 
-裝上之後實際長什麼樣子 —— 五個常見情境,各附中英文說明。
-*What it actually does — five common situations, explained in Chinese and English.*
+下面每一張都是 [archi-prompt.com](https://archi-prompt.com) 上的實際成果,提示詞原封不動附在圖下面,
+點標題可以看原始貼文。文生圖用英文寫、依黃金順序排;修圖用中文寫、開頭先鎖死不准動的東西。
 
-### 案例一:一句話展開成完整提示詞
+*Every image below was generated from the prompt printed under it, taken as-is from
+[archi-prompt.com](https://archi-prompt.com) — click a title for the original post. Text-to-image
+prompts are written in English in the golden order; retouching prompts are written in Chinese and
+open by pinning down what must not change.*
 
-**Case 1 — One sentence becomes a full prompt**
+### [安藤忠雄風・清水模美術館與光縫](https://archi-prompt.com/p/0aa4b2e3-0fef-4c0d-9b48-40213ec700e8)
 
-你說:「幫我寫一個山坡上的美術館,清水模,要有天光。」
-*You say: "Write me a prompt for a museum on a hillside, exposed concrete, with a skylight."*
+`建築外觀 Exterior` · `文生圖 Text-to-image` · `Grok`
 
-它照黃金順序展開,英文、一句一件事、收尾補一行避免清單:
-*It expands that in the golden order — English, one idea per sentence, closing with an avoid list:*
-
-```
-A low horizontal museum volume embedded into a sloping hillside, three staggered
-rectangular masses stepping down with the terrain. Orthogonal geometry, long
-unbroken roof line. Exposed board-formed concrete structural frame, visible
-tie-rod holes. A single narrow skylight slot runs the full length of the main
-gallery. Frameless glazing only at the two end walls. Circulation is a linear
-procession from a compressed entry into the tall gallery. Native grasses and a
-shallow reflecting pool at the lower level. Soft overcast daylight, one shaft of
-light falling from the skylight onto the floor. 24mm tilt-shift, eye level,
-one-point perspective. Architectural photography, ultra photorealistic, 8K.
-
-Avoid: glass curtain walls, decorative panels, golden hour lighting, cars in the
-foreground, text or labels.
-```
-
-光線排在第八段,不是第一句。寫在開頭,模型會把「光」當成這張圖的主題,建築本身就歪了。
-*Lighting comes eighth, not first. Put it up front and the model treats light as the subject of the image — and the building itself falls apart.*
-
-### 案例二:SketchUp 白模轉寫實渲染
-
-**Case 2 — Turning a SketchUp white model into a photoreal render**
-
-你說:「這張 SU 截圖想轉成寫實照片。」修圖用中文寫,而且重點不是要改什麼,是先講死什麼不准動:
-*You say: "Turn this SketchUp screenshot into a photo." Retouching prompts are written in Chinese, and the point is not what to change — it is nailing down what must not move:*
+<img src="https://archi-prompt.com/uploads/gen-0aa4b2e3.webp" width="62%" alt="Tadao Ando style concrete museum with a slit skylight and reflecting pool">
 
 ```
-把這張 SketchUp 白模截圖轉成擬真建築攝影:建築量體、開窗位置、視角完全不變。
-外牆改為清水混凝土,開口部為深灰鋁框玻璃,加入柔和的下午自然光與正確陰影,
-背景補上淺景深的街道、行道樹與天空,地面為淺色石材鋪面,整體呈現專業建築攝影質感。
+Art museum in the style of Tadao Ando, smooth exposed concrete volumes, a long slit
+skylight casting a moving blade of light on the wall, shallow reflecting pool at the
+entrance, single cherry tree, misty dawn, serene photorealistic photography
 ```
 
-沒有第一句那半行,模型會順手把樓層數與拍攝角度一起重畫 —— 這是修圖最常見的失敗。
-*Without that first clause, the model happily redraws the floor count and the camera angle too — the single most common way retouching goes wrong.*
+材料(清水模)排在光線(晨霧)前面,所以出來的是一棟建築,不是一張氣氛照。
+*Material comes before light, so the result is a building — not a mood shot.*
 
-### 案例三:同一個角度,三種材質方案
+### [Zaha Hadid 風・流動曲面表演藝術中心](https://archi-prompt.com/p/ff378a3a-2846-43f3-85ca-01f8444b260d)
 
-**Case 3 — Same viewpoint, three material options**
+`建築外觀 Exterior` · `文生圖 Text-to-image` · `GPT Image`
 
-要做方案比較,除了指定的那一項,其他全部寫死,否則兩張圖沒有可比性:
-*For an options comparison, everything except the one variable has to be pinned down, or the images cannot be compared at all:*
+![Zaha Hadid style performing arts center with fluid white shell at dusk](https://archi-prompt.com/uploads/gen-ff378a3a.webp)
 
 ```
-以這張街屋立面為基礎,生成材質方案比較:方案A 深灰金屬板+木格柵、
-方案B 白色塗料+綠植牆、方案C 玻璃磚+清水模。開窗位置與建築輪廓完全不變,
-每個方案單獨出圖,相同視角相同光線,方便並排比較。
+Performing arts center in the style of Zaha Hadid, fluid white curvilinear shell flowing
+into the plaza, seamless GRC surfaces, ribbon-like glazing, dusk with cool blue sky and
+warm interior glow, aerial three-quarter view, photorealistic rendering
 ```
 
-*Fix the openings, the outline, the viewpoint and the light; change only the material. That is what makes a comparison a comparison.*
+大師風格要落到具體的量體與材料(`fluid white curvilinear shell`、`seamless GRC`),只寫名字模型會亂猜。
+*A master's name has to land on real mass and material; the name alone leaves the model guessing.*
 
-### 案例四:把沒有資訊量的形容詞換掉
+### [台灣街屋改造・雨後傍晚](https://archi-prompt.com/p/6a16d579-8dbe-48f5-8536-475ba054c41d)
 
-**Case 4 — Replacing adjectives that carry no information**
+`建築外觀 Exterior` · `文生圖 Text-to-image` · `Grok`
 
-| ✗ 不要寫 / Don't write | ✓ 改寫成 / Write instead | 為什麼 / Why |
-|---|---|---|
-| `modern building` | `horizontal reinforced concrete pavilion` | Modern 可以是 Apple、Zaha、SANAA、Foster,資訊量幾乎為零<br>*"Modern" could mean Apple, Zaha, SANAA or Foster — near-zero information* |
-| `minimal` | `very few architectural elements, large uninterrupted surfaces, absence of decoration` | 每個模型對 minimal 的理解都不同<br>*Every model reads "minimal" differently* |
-| `peaceful` `elegant` | `still water, empty foreground, no people, soft overcast daylight` | 描述原因,不要描述感覺<br>*Describe the cause, not the feeling* |
-| `large courtyard` | `courtyard occupies 40% of site`, `roof spans 18 meters` | 給比例,模型才穩定<br>*Give proportions and the output stops drifting* |
-| `Ando + Kuma + Zaha` | `floating slab, warm timber, filtered daylight` | 混搭大師名字只會得到四不像,要拆成共同語彙<br>*Stacking famous names yields mush — break them down into shared vocabulary*|
+![Renovated Taiwanese narrow townhouse with perforated brick screen facade on a rainy evening](https://archi-prompt.com/uploads/gen-6a16d579.webp)
 
-### 案例五:直接撈站上四千多則現成的提示詞
+```
+Renovated narrow townhouse facade in a dense Taiwanese street, weathered neighbors on both
+sides, new perforated brick screen facade with warm light glowing through, scooters parked
+along the street, humid evening atmosphere after rain, overhead power lines, street-level
+photography, hyperrealistic, nostalgic yet contemporary mood
+```
 
-**Case 5 — Pulling from 4,000+ existing prompts on the site**
+老鄰居、機車、電線這些脈絡要明寫出來,不寫模型會把街屋放進一條乾淨的歐洲街道。
+*Spell out the context — neighbors, scooters, power lines — or the model drops the house into a tidy European street.*
 
-題材有現成的類似案例時,查一則回來當骨架,比從零開始寫快也準。skill 會自己去查:
-*When something similar already exists, fetching one as a skeleton is faster and more accurate than starting from scratch. The skill queries it on its own:*
+### [SketchUp 模型轉實景渲染](https://archi-prompt.com/p/780867a0-32e2-4c14-b8e6-8ba2720700dd)
+
+`修圖 Retouch` · `Nano Banana` · 站上最多人複製的一則 / most-copied prompt on the site
+
+![Photoreal architectural photography converted from a SketchUp white model](https://archi-prompt.com/uploads/gen-780867a0.webp)
+
+```
+將這張 SketchUp 白模截圖轉換成擬真建築攝影:保持建築量體、開窗位置與視角完全不變,
+加入真實材質(清水模、玻璃、金屬板),補上柔和的下午自然光與陰影,背景加入淺景深的
+街道與行道樹,整體呈現專業建築攝影質感。
+```
+
+「量體、開窗位置與視角完全不變」放在最前面 —— 少了這半句,模型會連樓層數跟拍攝角度一起重畫。
+*"Keep the massing, openings and viewpoint exactly the same" comes first — without it, the model redraws the floor count and the camera angle too.*
+
+### [Axel Vervoordt 風・侘寂鄉村客廳](https://archi-prompt.com/p/43cd5a79-3311-4187-8741-a25aad452150)
+
+`室內設計 Interior` · `文生圖 Text-to-image` · `GPT Image`
+
+![Wabi-sabi country living room with lime-washed walls and oak beams](https://archi-prompt.com/uploads/gen-43cd5a79.webp)
+
+```
+Country house living room designed by Axel Vervoordt, lime-washed textured walls,
+centuries-old oak beams, low linen sofas, wabi-sabi ceramics on a rustic altar table,
+soft window light with painterly shadows, quiet timeless atmosphere, fine art photo
+```
+
+室內的重點在材質的表面狀態(`lime-washed`、`centuries-old oak`),不是「溫馨」「有質感」這種感受詞。
+*Interiors live on surface condition — lime-washed, centuries-old oak — not on adjectives like "cozy".*
+
+### [Piet Oudolf 風・草甸式公共花園](https://archi-prompt.com/p/5ae02baf-0072-4a9c-9801-3fe752c9a72f)
+
+`景觀設計 Landscape` · `文生圖 Text-to-image` · `GPT Image`
+
+![Meadow-style public garden with ornamental grasses in golden autumn backlight](https://archi-prompt.com/uploads/gen-5ae02baf.webp)
+
+```
+Public garden designed by Piet Oudolf, drifts of ornamental grasses and echinacea seed
+heads in matrix planting, mown grass path winding through, low golden autumn backlight,
+frost on textures, immersive naturalistic garden photography
+```
+
+景觀要有種植邏輯與動線(`matrix planting`、`mown grass path`),否則只會得到一張漂亮的雜草。
+*Landscape needs a planting logic and a route through it, or you just get handsome weeds.*
+
+### 還有四千多則 / 4,000+ more
+
+<table>
+<tr>
+<td width="25%"><a href="https://archi-prompt.com/p/4e6ac053-60a7-42ec-8da4-9d5c6973655c"><img src="https://archi-prompt.com/uploads/gen-4e6ac053.webp" alt="Taiwanese sanheyuan courtyard house"></a><br>台灣三合院・燕尾脊<br><sub>Taiwanese sanheyuan</sub></td>
+<td width="25%"><a href="https://archi-prompt.com/p/9426e97f-ad1e-4a95-a378-5445bf3f8cea"><img src="https://archi-prompt.com/uploads/gen-9426e97f.webp" alt="Japanese zen rock garden in morning mist"></a><br>日式枯山水・晨霧<br><sub>Zen garden, morning mist</sub></td>
+<td width="25%"><a href="https://archi-prompt.com/p/6c366419-bc04-48bd-b7f7-cdfd6cc7f201"><img src="https://archi-prompt.com/uploads/gen-6c366419.webp" alt="Bare shell apartment virtually staged as a modern living room"></a><br>毛胚屋轉現代風客廳<br><sub>Bare shell → living room</sub></td>
+<td width="25%"><a href="https://archi-prompt.com/p/8fa463b3-6c5e-4932-9a43-25fb5a022a72"><img src="https://archi-prompt.com/uploads/gen-8fa463b3.webp" alt="Facade material swapped from concrete to red brick"></a><br>外牆材質替換<br><sub>Facade material swap</sub></td>
+</tr>
+</table>
+
+站上四千多則都可以用公開 API 查,skill 會在題材有現成案例時自己去撈一則當骨架。
+*All 4,000+ are queryable through the public API, and the skill fetches one as a skeleton whenever your subject already has a close match.*
 
 ```bash
 curl -s "https://archi-prompt.com/api/prompts?q=中庭&category=建築外觀&limit=5&brief=1"
 ```
 
-查到的內容是站上會員的作品,當參考與骨架用,不要整段照抄後宣稱是自己寫的。
-*Results are work by the site's members. Use them as reference and structure — don't paste one wholesale and call it yours.*
+以上提示詞為站上會員投稿,著作權屬原作者,這裡引用作為說明用途。
+*The prompts above were submitted by members of the site and remain theirs; they are quoted here for illustration.*
 
 ## 內容
 
