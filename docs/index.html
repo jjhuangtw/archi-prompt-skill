@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>archi-prompt skill</title>
+<meta name="description" content="A prompting skill for architecture, interior and landscape AI images. 建築・室內・景觀 AI 提示詞技能。">
+<link rel="canonical" href="https://jjhuangtw.github.io/archi-prompt-skill/">
+<style>
+:root {
+  --bg: #101216; --bg-soft: #171a20; --card: #1d212a; --card-hover: #232833;
+  --border: #2c3240; --text: #e8eaf0; --text-dim: #9aa3b5;
+  --accent: #d8b06a; --accent-ink: #17130a;
+  --type-gen: #6aa8d8; --type-edit: #7fbf8e;
+  --radius: 14px; font-size: 15px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif;
+  line-height: 1.7;
+}
+:lang(ja) body, body[data-lang="ja"] {
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+}
+.container { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code {
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 5px; padding: 1px 5px; font-size: 0.88em;
+}
+pre {
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 18px; overflow-x: auto;
+  font-size: 0.86rem; line-height: 1.6;
+}
+pre code { background: none; border: 0; padding: 0; }
+
+/* ===== Header ===== */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(16, 18, 22, 0.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.site-header .container {
+  display: flex; align-items: center; gap: 16px;
+  height: 56px; justify-content: space-between;
+}
+.brand { font-weight: 700; letter-spacing: .02em; color: var(--text); }
+.brand span { color: var(--accent); }
+.langs { display: flex; gap: 4px; flex-wrap: wrap; }
+.langs button {
+  background: none; border: 1px solid transparent; color: var(--text-dim);
+  border-radius: 999px; padding: 4px 11px; font-size: .82rem; cursor: pointer;
+  font-family: inherit; white-space: nowrap;
+}
+.langs button:hover { color: var(--text); border-color: var(--border); }
+.langs button[aria-current="true"] {
+  background: var(--accent); color: var(--accent-ink); font-weight: 600;
+}
+
+/* ===== Hero ===== */
+.hero { padding: 56px 0 8px; }
+.hero h1 { font-size: 2.1rem; margin: 0 0 10px; letter-spacing: -.01em; }
+.hero .tagline { color: var(--accent); font-size: 1.05rem; margin: 0 0 18px; }
+.hero p { color: var(--text-dim); margin: 0 0 14px; }
+.cta { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 8px; }
+.cta a {
+  border: 1px solid var(--border); background: var(--card);
+  border-radius: 999px; padding: 9px 18px; font-size: .92rem; color: var(--text);
+}
+.cta a.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.cta a:hover { text-decoration: none; background: var(--card-hover); }
+.cta a.primary:hover { filter: brightness(1.07); background: var(--accent); }
+
+section { padding: 34px 0; border-top: 1px solid var(--border); margin-top: 34px; }
+h2 { font-size: 1.3rem; margin: 0 0 14px; }
+h3 { font-size: 1.02rem; margin: 0 0 6px; }
+.lead { color: var(--text-dim); margin: 0 0 20px; }
+
+.order {
+  display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 18px; padding: 0; list-style: none;
+}
+.order li {
+  background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+  padding: 4px 12px; font-size: .84rem; color: var(--text-dim);
+}
+.order li:first-child, .order li:nth-child(2) { color: var(--accent); border-color: #453a22; }
+
+/* ===== Examples ===== */
+.case { margin: 0 0 40px; }
+.case-meta { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 12px; }
+.tag {
+  font-size: .74rem; border: 1px solid var(--border); border-radius: 999px;
+  padding: 2px 9px; color: var(--text-dim);
+}
+.tag.gen { color: var(--type-gen); border-color: #274056; }
+.tag.edit { color: var(--type-edit); border-color: #2a4632; }
+.case img {
+  width: 100%; max-width: 480px; height: auto; display: block;
+  border-radius: var(--radius); border: 1px solid var(--border); margin: 0 0 12px;
+}
+.case.portrait img { max-width: 320px; }
+.case .note { color: var(--text-dim); font-size: .93rem; margin: 12px 0 0; }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; margin: 18px 0 0;
+}
+.grid a { display: block; color: var(--text-dim); font-size: .8rem; }
+.grid img {
+  width: 100%; height: 108px; object-fit: cover; display: block;
+  border-radius: 10px; border: 1px solid var(--border); margin-bottom: 6px;
+}
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+td { border-top: 1px solid var(--border); padding: 9px 10px 9px 0; vertical-align: top; }
+td:first-child { color: var(--accent); white-space: nowrap; width: 1%; padding-right: 18px; }
+footer { border-top: 1px solid var(--border); margin-top: 34px; padding: 26px 0 60px; color: var(--text-dim); font-size: .88rem; }
+@media (max-width: 640px) {
+  .hero { padding-top: 34px; }
+  .hero h1 { font-size: 1.7rem; }
+  .site-header .container { height: auto; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="https://archi-prompt.com">Archi<span>Prompt</span></a>
+    <nav class="langs" id="langs" aria-label="Language"></nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="hero">
+    <h1>archi-prompt skill</h1>
+    <p class="tagline" data-i18n="tagline"></p>
+    <p data-i18n="intro1"></p>
+    <p data-i18n="intro2"></p>
+    <div class="cta">
+      <a class="primary" href="https://github.com/jjhuangtw/archi-prompt-skill" data-i18n="ctaRepo"></a>
+      <a href="https://archi-prompt.com" data-i18n="ctaSite"></a>
+    </div>
+  </div>
+
+  <section>
+    <h2 data-i18n="methodTitle"></h2>
+    <p data-i18n="methodLead"></p>
+    <ul class="order" id="order"></ul>
+    <p data-i18n="methodRetouch"></p>
+  </section>
+
+  <section>
+    <h2 data-i18n="examplesTitle"></h2>
+    <p class="lead" data-i18n="examplesLead"></p>
+    <div id="cases"></div>
+    <h3 data-i18n="moreTitle"></h3>
+    <div class="grid" id="thumbs"></div>
+    <p class="note" data-i18n="moreNote" style="color:var(--text-dim);font-size:.93rem;"></p>
+  </section>
+
+  <section>
+    <h2 data-i18n="insideTitle"></h2>
+    <table><tbody id="inside"></tbody></table>
+  </section>
+
+  <section>
+    <h2 data-i18n="installTitle"></h2>
+    <p class="lead" data-i18n="installLead"></p>
+    <h3>Claude Code</h3>
+    <pre><code>/plugin marketplace add jjhuangtw/archi-prompt-skill
+/plugin install archi-prompt@archi-prompt</code></pre>
+    <p data-i18n="installClaude"></p>
+    <h3 data-i18n="installCliTitle"></h3>
+    <p data-i18n="installCli"></p>
+    <pre><code>git clone https://github.com/jjhuangtw/archi-prompt-skill.git
+cd archi-prompt-skill</code></pre>
+    <h3 data-i18n="installPortableTitle"></h3>
+    <p data-i18n="installPortable"></p>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p data-i18n="license"></p>
+  </div>
+</footer>
+
+<script>
+/* 語言偵測與主站一致:手動選擇(localStorage.archi_lang)→ 瀏覽器語言 → 英文。
+   共用同一個 localStorage 鍵,從主站切過語言再進來就是同一個語系。 */
+var LANGS = ['zh-TW', 'zh-CN', 'en', 'ja'];
+var LANG_LABEL = { 'zh-TW': '繁體中文', 'zh-CN': '简体中文', en: 'English', ja: '日本語' };
+
+function detectLang() {
+  try {
+    var saved = localStorage.getItem('archi_lang');
+    if (saved && LANGS.indexOf(saved) >= 0) return saved;
+  } catch (e) {}
+  var q = new URLSearchParams(location.search).get('lang');
+  if (q && LANGS.indexOf(q) >= 0) return q;
+  var cands = (navigator.languages && navigator.languages.length)
+    ? navigator.languages : [navigator.language || 'en'];
+  for (var i = 0; i < cands.length; i++) {
+    var l = String(cands[i]).toLowerCase();
+    if (l.indexOf('zh') === 0) {
+      if (l.indexOf('tw') >= 0 || l.indexOf('hk') >= 0 || l.indexOf('mo') >= 0 || l.indexOf('hant') >= 0) return 'zh-TW';
+      return 'zh-CN';
+    }
+    if (l.indexOf('ja') === 0) return 'ja';
+    if (l.indexOf('en') === 0) return 'en';
+  }
+  return 'en';
+}
+
+var ORDER = {
+  'zh-TW': ['量體','幾何','結構','材料','開口','空間組織','景觀','光線','鏡頭','算圖'],
+  'zh-CN': ['体量','几何','结构','材料','开口','空间组织','景观','光线','镜头','渲染'],
+  en: ['Mass','Geometry','Structure','Material','Openings','Spatial','Landscape','Lighting','Camera','Rendering'],
+  ja: ['ボリューム','幾何','構造','素材','開口','空間構成','ランドスケープ','光','カメラ','レンダリング']
+};
+
+/* 提示詞是成品,四種語言都顯示原文,不翻譯 */
+var CASES = [
+  { img: 'gen-0aa4b2e3', pid: '0aa4b2e3-0fef-4c0d-9b48-40213ec700e8', portrait: true,
+    cat: 'exterior', type: 'gen', model: 'Grok',
+    prompt: 'Art museum in the style of Tadao Ando, smooth exposed concrete volumes, a long slit skylight casting a moving blade of light on the wall, shallow reflecting pool at the entrance, single cherry tree, misty dawn, serene photorealistic photography' },
+  { img: 'gen-ff378a3a', pid: 'ff378a3a-2846-43f3-85ca-01f8444b260d',
+    cat: 'exterior', type: 'gen', model: 'GPT Image',
+    prompt: 'Performing arts center in the style of Zaha Hadid, fluid white curvilinear shell flowing into the plaza, seamless GRC surfaces, ribbon-like glazing, dusk with cool blue sky and warm interior glow, aerial three-quarter view, photorealistic rendering' },
+  { img: 'gen-6a16d579', pid: '6a16d579-8dbe-48f5-8536-475ba054c41d',
+    cat: 'exterior', type: 'gen', model: 'Grok',
+    prompt: 'Renovated narrow townhouse facade in a dense Taiwanese street, weathered neighbors on both sides, new perforated brick screen facade with warm light glowing through, scooters parked along the street, humid evening atmosphere after rain, overhead power lines, street-level photography, hyperrealistic, nostalgic yet contemporary mood' },
+  { img: 'gen-780867a0', pid: '780867a0-32e2-4c14-b8e6-8ba2720700dd',
+    cat: 'exterior', type: 'edit', model: 'Nano Banana',
+    prompt: '將這張 SketchUp 白模截圖轉換成擬真建築攝影:保持建築量體、開窗位置與視角完全不變,加入真實材質(清水模、玻璃、金屬板),補上柔和的下午自然光與陰影,背景加入淺景深的街道與行道樹,整體呈現專業建築攝影質感。' },
+  { img: 'gen-43cd5a79', pid: '43cd5a79-3311-4187-8741-a25aad452150',
+    cat: 'interior', type: 'gen', model: 'GPT Image',
+    prompt: 'Country house living room designed by Axel Vervoordt, lime-washed textured walls, centuries-old oak beams, low linen sofas, wabi-sabi ceramics on a rustic altar table, soft window light with painterly shadows, quiet timeless atmosphere, fine art photo' },
+  { img: 'gen-5ae02baf', pid: '5ae02baf-0072-4a9c-9801-3fe752c9a72f',
+    cat: 'landscape', type: 'gen', model: 'GPT Image',
+    prompt: 'Public garden designed by Piet Oudolf, drifts of ornamental grasses and echinacea seed heads in matrix planting, mown grass path winding through, low golden autumn backlight, frost on textures, immersive naturalistic garden photography' }
+];
+
+var THUMBS = [
+  { img: 'gen-4e6ac053', pid: '4e6ac053-60a7-42ec-8da4-9d5c6973655c' },
+  { img: 'gen-9426e97f', pid: '9426e97f-ad1e-4a95-a378-5445bf3f8cea' },
+  { img: 'gen-6c366419', pid: '6c366419-bc04-48bd-b7f7-cdfd6cc7f201' },
+  { img: 'gen-8fa463b3', pid: '8fa463b3-6c5e-4932-9a43-25fb5a022a72' }
+];
+
+var T = {
+  'zh-TW': {
+    tagline: '給 Claude 用的建築 AI 提示詞技能',
+    intro1: '來自 archi-prompt.com —— 一個累積了四千多則建築、室內、景觀 AI 提示詞的社群平台 —— 把站上整理出來的寫作方法打包成一個 skill。',
+    intro2: '裝上之後,跟 Claude 說「幫我寫一個山坡上美術館的提示詞」或「這張 SU 模型想轉成寫實渲染」,它就會照這套方法寫,而不是堆一串形容詞。',
+    ctaRepo: '到 GitHub 取得', ctaSite: '瀏覽四千多則提示詞',
+    methodTitle: '核心方法',
+    methodLead: 'AI 不是依「風格」理解建築,而是依「資訊優先級」生成畫面。模型會把提示詞開頭的東西當成主要資訊 —— 把 golden hour 寫在第一句,建築本身就會歪掉。所以提示詞照這個順序排:',
+    methodRetouch: '修圖則是另一套邏輯:重點不是「要改什麼」,而是明寫「什麼必須保持不變」,否則模型會順手把樓層數與拍攝角度一起重畫。',
+    examplesTitle: '範例',
+    examplesLead: '每一張都是站上的實際成果,提示詞原封不動附在圖下面,點圖可以看原始貼文。文生圖用英文寫、依黃金順序排;修圖用中文寫、開頭先鎖死不准動的東西。',
+    moreTitle: '還有四千多則',
+    moreNote: '題材如果站上已經有類似的,skill 會撈一則回來當骨架,比從零開始寫快也準。',
+    insideTitle: '內容',
+    inside: [['方法論','黃金順序十段結構、空間文法庫、常見錯誤對照'],['風格','34 種當代風格(建築/室內/景觀),各有關鍵字與完整範例'],['大師','32 位設計師的語彙(建築師 12、室內 10、景觀 10)'],['建築史','44 種歷史風格,含風格轉換模板'],['修圖','SU 模型轉渲染、光線與時間、材質方案比較、視角與圖面轉換'],['實例','需要時到站上四千多則現成提示詞裡找相近的當骨架']],
+    installTitle: '安裝', installLead: '同一份內容包成三種入口,依你用的工具選一個。',
+    installClaude: '或直接把 plugins/archi-prompt/skills/archi-prompt/ 整個資料夾放到 ~/.claude/skills/ 底下。',
+    installCliTitle: 'OpenAI Codex、Gemini CLI 等 CLI agent',
+    installCli: '把這個 repo clone 下來,在裡面開你的 agent 就行 —— 根目錄的 AGENTS.md 是這類工具的通用慣例,它會自動讀。',
+    installPortableTitle: 'ChatGPT 的 Custom GPT、Gemini 的 Gem',
+    installPortable: '那兩個產品沒有檔案系統,所以內容攤平成兩個檔案放在 repo 的 portable/:instructions.md 貼進指示欄位,knowledge.md 當知識庫上傳。',
+    license: 'MIT 授權,可自由使用、修改、商業利用。用得上的話,歡迎順手提一下出處 archi-prompt.com。',
+    notes: [
+      '材料(清水模)排在光線(晨霧)前面,所以出來的是一棟建築,不是一張氣氛照。',
+      '大師風格要落到具體的量體與材料,只寫名字模型會亂猜。',
+      '老鄰居、機車、電線這些脈絡要明寫出來,不寫模型會把街屋放進一條乾淨的歐洲街道。',
+      '「量體、開窗位置與視角完全不變」放在最前面 —— 少了這半句,模型會連樓層數跟拍攝角度一起重畫。',
+      '室內的重點在材質的表面狀態,不是「溫馨」「有質感」這種感受詞。',
+      '景觀要有種植邏輯與動線,否則只會得到一張漂亮的雜草。'
+    ],
+    titles: ['安藤忠雄風・清水模美術館與光縫','Zaha Hadid 風・流動曲面表演藝術中心','台灣街屋改造・雨後傍晚','SketchUp 模型轉實景渲染','Axel Vervoordt 風・侘寂鄉村客廳','Piet Oudolf 風・草甸式公共花園'],
+    thumbCaps: ['台灣三合院・燕尾脊','日式枯山水・晨霧','毛胚屋轉現代風客廳','外牆材質替換'],
+    cat: { exterior: '建築外觀', interior: '室內設計', landscape: '景觀設計' },
+    type: { gen: '文生圖', edit: '修圖' }
+  },
+  'zh-CN': {
+    tagline: '给 Claude 用的建筑 AI 提示词技能',
+    intro1: '来自 archi-prompt.com —— 一个累积了四千多则建筑、室内、景观 AI 提示词的社区平台 —— 把站上整理出来的写作方法打包成一个 skill。',
+    intro2: '装上之后,跟 Claude 说「帮我写一个山坡上美术馆的提示词」或「这张 SU 模型想转成写实渲染」,它就会照这套方法写,而不是堆一串形容词。',
+    ctaRepo: '到 GitHub 取得', ctaSite: '浏览四千多则提示词',
+    methodTitle: '核心方法',
+    methodLead: 'AI 不是依「风格」理解建筑,而是依「信息优先级」生成画面。模型会把提示词开头的东西当成主要信息 —— 把 golden hour 写在第一句,建筑本身就会歪掉。所以提示词照这个顺序排:',
+    methodRetouch: '修图则是另一套逻辑:重点不是「要改什么」,而是明写「什么必须保持不变」,否则模型会顺手把楼层数与拍摄角度一起重画。',
+    examplesTitle: '范例',
+    examplesLead: '每一张都是站上的实际成果,提示词原封不动附在图下面,点图可以看原始贴文。文生图用英文写、依黄金顺序排;修图用中文写、开头先锁死不准动的东西。',
+    moreTitle: '还有四千多则',
+    moreNote: '题材如果站上已经有类似的,skill 会捞一则回来当骨架,比从零开始写快也准。',
+    insideTitle: '内容',
+    inside: [['方法论','黄金顺序十段结构、空间文法库、常见错误对照'],['风格','34 种当代风格(建筑/室内/景观),各有关键词与完整范例'],['大师','32 位设计师的语汇(建筑师 12、室内 10、景观 10)'],['建筑史','44 种历史风格,含风格转换模板'],['修图','SU 模型转渲染、光线与时间、材质方案比较、视角与图面转换'],['实例','需要时到站上四千多则现成提示词里找相近的当骨架']],
+    installTitle: '安装', installLead: '同一份内容包成三种入口,依你用的工具选一个。',
+    installClaude: '或直接把 plugins/archi-prompt/skills/archi-prompt/ 整个文件夹放到 ~/.claude/skills/ 底下。',
+    installCliTitle: 'OpenAI Codex、Gemini CLI 等 CLI agent',
+    installCli: '把这个 repo clone 下来,在里面开你的 agent 就行 —— 根目录的 AGENTS.md 是这类工具的通用惯例,它会自动读。',
+    installPortableTitle: 'ChatGPT 的 Custom GPT、Gemini 的 Gem',
+    installPortable: '那两个产品没有文件系统,所以内容摊平成两个文件放在 repo 的 portable/:instructions.md 贴进指示栏位,knowledge.md 当知识库上传。',
+    license: 'MIT 授权,可自由使用、修改、商业利用。用得上的话,欢迎顺手提一下出处 archi-prompt.com。',
+    notes: [
+      '材料(清水混凝土)排在光线(晨雾)前面,所以出来的是一栋建筑,而不是一张气氛照。',
+      '大师风格要落到具体的体量与材料,只写名字模型会乱猜。',
+      '老邻居、机车、电线这些脉络要明写出来,不写模型会把街屋放进一条干净的欧洲街道。',
+      '「体量、开窗位置与视角完全不变」放在最前面 —— 少了这半句,模型会连楼层数跟拍摄角度一起重画。',
+      '室内的重点在材质的表面状态,不是「温馨」「有质感」这类感受词。',
+      '景观要有种植逻辑与动线,否则只会得到一张漂亮的杂草。'
+    ],
+    titles: ['安藤忠雄风・清水混凝土美术馆与光缝','Zaha Hadid 风・流动曲面表演艺术中心','台湾街屋改造・雨后傍晚','SketchUp 模型转实景渲染','Axel Vervoordt 风・侘寂乡村客厅','Piet Oudolf 风・草甸式公共花园'],
+    thumbCaps: ['台湾三合院・燕尾脊','日式枯山水・晨雾','毛坯房转现代风客厅','外墙材质替换'],
+    cat: { exterior: '建筑外观', interior: '室内设计', landscape: '景观设计' },
+    type: { gen: '文生图', edit: '修图' }
+  },
+  en: {
+    tagline: 'An architectural AI prompting skill for Claude',
+    intro1: 'It comes from archi-prompt.com — a community site holding 4,000+ prompts for architecture, interiors and landscape — and packages the writing method distilled there into a single skill.',
+    intro2: 'Once installed, ask Claude for "a prompt for a museum on a hillside" or "turn this SketchUp model into a photoreal render" and it writes to this method instead of piling up adjectives.',
+    ctaRepo: 'Get it on GitHub', ctaSite: 'Browse 4,000+ prompts',
+    methodTitle: 'The core method',
+    methodLead: 'AI does not understand architecture through "style" — it generates from information priority. A model treats whatever opens the prompt as the main subject, so putting golden hour in the first sentence breaks the building itself. The prompt is ordered like this:',
+    methodRetouch: 'Retouching runs on the opposite logic: the point is not what to change, but writing down what must stay exactly as it is — otherwise the model redraws the floor count and the camera angle along the way.',
+    examplesTitle: 'Examples',
+    examplesLead: 'Every image was generated from the prompt printed under it, taken as-is from the site — click an image for the original post. Text-to-image prompts are written in English in the golden order; retouching prompts are written in Chinese and open by pinning down what must not change.',
+    moreTitle: '4,000+ more',
+    moreNote: 'When your subject already has a close match on the site, the skill pulls one back as a skeleton — faster and more accurate than starting from scratch.',
+    insideTitle: "What's inside",
+    inside: [['Method','The ten-part golden order, a spatial grammar library, a table of common mistakes'],['Styles','34 contemporary styles (architecture / interior / landscape), each with keywords and a full example'],['Masters','The vocabulary of 32 designers (12 architects, 10 interior, 10 landscape)'],['History','44 historical styles, with style-transfer templates'],['Retouching','Model-to-render, light and time of day, material comparisons, viewpoint and drawing conversion'],['Real cases','Find a close match among the 4,000+ prompts on the site and use it as a skeleton']],
+    installTitle: 'Install', installLead: 'The same content is packaged three ways. Pick the one that matches your tool.',
+    installClaude: 'Or drop the whole plugins/archi-prompt/skills/archi-prompt/ folder into ~/.claude/skills/.',
+    installCliTitle: 'OpenAI Codex, Gemini CLI and other CLI agents',
+    installCli: 'Clone the repo and start your agent inside it — AGENTS.md in the root is the common convention for these tools, and they read it automatically.',
+    installPortableTitle: 'Custom GPTs on ChatGPT, Gems on Gemini',
+    installPortable: 'Neither product has a file system, so the content is flattened into two files under portable/ in the repo: paste instructions.md into the instructions field and upload knowledge.md as knowledge.',
+    license: 'MIT licensed — free to use, modify and use commercially. A credit to archi-prompt.com is appreciated when it helps.',
+    notes: [
+      'Material comes before light, so the result is a building — not a mood shot.',
+      "A master's name has to land on real mass and material; the name alone leaves the model guessing.",
+      'Spell out the context — weathered neighbors, scooters, power lines — or the model drops the house into a tidy European street.',
+      '"Keep the massing, openings and viewpoint exactly the same" comes first. Retouching prompts are written in Chinese on purpose: they are instructions, and Nano Banana follows Chinese instructions precisely.',
+      'Interiors live on surface condition — lime-washed, centuries-old oak — not on adjectives like "cozy".',
+      'Landscape needs a planting logic and a route through it, or you just get handsome weeds.'
+    ],
+    titles: ['Tadao Ando Style · Bare Concrete Museum and Light Gap','Zaha Hadid Style · Fluid Curve Performing Arts Center','Taiwanese Street House Renovation · Post-Rain Evening','SketchUp Model to Realistic Rendering','Axel Vervoordt Style · Wabi-Sabi Country Living Room','Piet Oudolf Style · Meadow-Style Public Garden'],
+    thumbCaps: ['Taiwanese sanheyuan','Zen garden, morning mist','Bare shell → living room','Facade material swap'],
+    cat: { exterior: 'Exterior', interior: 'Interior', landscape: 'Landscape' },
+    type: { gen: 'Text-to-image', edit: 'Retouch' }
+  },
+  ja: {
+    tagline: 'Claude 用の建築 AI プロンプトスキル',
+    intro1: '建築・インテリア・ランドスケープのプロンプトを4,000件以上蓄積したコミュニティサイト archi-prompt.com から、そこで整理された書き方をひとつの skill にまとめたもの。',
+    intro2: 'インストールしたあと、Claude に「丘の上の美術館のプロンプトを書いて」「この SketchUp モデルをフォトリアルにしたい」と頼めば、形容詞を並べるのではなく、この方法に沿って書く。',
+    ctaRepo: 'GitHub で入手', ctaSite: '4,000件以上のプロンプトを見る',
+    methodTitle: '中核となる方法',
+    methodLead: 'AI は「スタイル」で建築を理解しない。「情報の優先順位」で画像を生成する。モデルは冒頭にあるものを主題として扱うため、golden hour を最初に置くと建築そのものが崩れる。だからこの順に並べる:',
+    methodRetouch: 'レタッチは逆のロジックになる。要点は「何を変えるか」ではなく、「何を変えてはいけないか」を明記すること。そうしなければ、モデルは階数やカメラアングルまで描き直す。',
+    examplesTitle: '実例',
+    examplesLead: 'どの画像も、その下のプロンプトから生成されたもの。画像をクリックすると元の投稿を見られる。テキストから生成するプロンプトは英語でゴールデンオーダーに沿って、レタッチのプロンプトは中国語で、変えてはいけないものを冒頭で固定して書く。',
+    moreTitle: 'ほかにも4,000件以上',
+    moreNote: '題材に近いものがサイトにあれば、skill はそれを骨組みとして引いてくる。ゼロから書くより速く、精度も高い。',
+    insideTitle: '収録内容',
+    inside: [['方法論','ゴールデンオーダー10段構成、空間文法ライブラリ、よくある失敗の対照表'],['スタイル','現代の34スタイル(建築/インテリア/ランドスケープ)、キーワードと作例つき'],['巨匠','32人のデザイナーの語彙(建築12、インテリア10、ランドスケープ10)'],['建築史','44の歴史様式、スタイル変換テンプレートつき'],['レタッチ','モデルからレンダリングへ、光と時間帯、素材案の比較、視点と図面の変換'],['実例','サイトの4,000件以上から近いものを探して骨組みに使う']],
+    installTitle: 'インストール', installLead: '同じ内容を3つの形式にまとめてある。使っているツールに合わせて選ぶ。',
+    installClaude: 'あるいは plugins/archi-prompt/skills/archi-prompt/ フォルダをそのまま ~/.claude/skills/ に置いてもいい。',
+    installCliTitle: 'OpenAI Codex、Gemini CLI などの CLI エージェント',
+    installCli: 'このリポジトリを clone して、その中でエージェントを起動するだけ。ルートの AGENTS.md はこの種のツールの共通慣例で、自動的に読み込まれる。',
+    installPortableTitle: 'ChatGPT の Custom GPT、Gemini の Gem',
+    installPortable: 'この2つにはファイルシステムがないため、内容を2つのファイルに平坦化してリポジトリの portable/ に置いてある。instructions.md を指示欄に貼り、knowledge.md をナレッジとしてアップロードする。',
+    license: 'MIT ライセンス。自由に使用・改変・商用利用できる。役に立ったら archi-prompt.com に触れてもらえると嬉しい。',
+    notes: [
+      '素材(打ち放しコンクリート)を光(朝霧)より先に置く。だから出てくるのは建築であって、雰囲気写真ではない。',
+      '巨匠の名前は具体的なボリュームと素材に落とし込む。名前だけでは、モデルは当てずっぽうで描く。',
+      '古い隣家、スクーター、電線といった文脈は明示する。書かなければ、小綺麗なヨーロッパの通りに置かれてしまう。',
+      '「ボリューム・開口位置・視点はまったく変えない」を最初に置く。レタッチのプロンプトを中国語で書くのは意図的で、指示文としての精度が高いため。',
+      'インテリアは素材の表面の状態で決まる。「居心地がいい」といった感覚語では決まらない。',
+      'ランドスケープには植栽のロジックと動線が要る。なければ、見栄えのいい雑草にしかならない。'
+    ],
+    titles: ['安藤忠雄風・コンクリート打ち放し美術館と光の隙間','ザハ・ハディド風・流れるような曲面の舞台芸術センター','台湾の街屋リノベーション・雨上がりの夕方','SketchUp モデルからリアルなレンダリングへ','アクセル・フェルヴォールト風・侘寂のカントリーリビング','ピート・アウドルフ風・草原式パブリックガーデン'],
+    thumbCaps: ['台湾の三合院・燕尾棟','枯山水庭園・朝霧','スケルトン物件→リビング','外壁材の交換'],
+    cat: { exterior: '外観', interior: 'インテリア', landscape: 'ランドスケープ' },
+    type: { gen: 'テキストから生成', edit: 'レタッチ' }
+  }
+};
+
+var LANG = detectLang();
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderLangs() {
+  var nav = document.getElementById('langs');
+  nav.innerHTML = LANGS.map(function (l) {
+    return '<button type="button" data-lang="' + l + '" aria-current="' + (l === LANG) + '">' + LANG_LABEL[l] + '</button>';
+  }).join('');
+  nav.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); });
+  });
+}
+
+function render() {
+  var d = T[LANG];
+  document.documentElement.lang = LANG;
+  document.body.setAttribute('data-lang', LANG);
+
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = d[el.dataset.i18n];
+    if (v) el.textContent = v;
+  });
+
+  document.getElementById('order').innerHTML =
+    ORDER[LANG].map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
+
+  document.getElementById('cases').innerHTML = CASES.map(function (c, i) {
+    return '<div class="case' + (c.portrait ? ' portrait' : '') + '">' +
+      '<h3>' + esc(d.titles[i]) + '</h3>' +
+      '<div class="case-meta">' +
+        '<span class="tag">' + esc(d.cat[c.cat]) + '</span>' +
+        '<span class="tag ' + c.type + '">' + esc(d.type[c.type]) + '</span>' +
+        '<span class="tag">' + esc(c.model) + '</span>' +
+      '</div>' +
+      '<a href="https://archi-prompt.com/p/' + c.pid + '"><img src="https://archi-prompt.com/uploads/' + c.img + '.webp" alt="' + esc(d.titles[i]) + '" loading="lazy"></a>' +
+      '<pre><code>' + esc(c.prompt) + '</code></pre>' +
+      '<p class="note">' + esc(d.notes[i]) + '</p>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('thumbs').innerHTML = THUMBS.map(function (t, i) {
+    return '<a href="https://archi-prompt.com/p/' + t.pid + '"><img src="https://archi-prompt.com/uploads/' + t.img + '.webp" alt="' + esc(d.thumbCaps[i]) + '" loading="lazy">' + esc(d.thumbCaps[i]) + '</a>';
+  }).join('');
+
+  document.getElementById('inside').innerHTML = d.inside.map(function (r) {
+    return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>';
+  }).join('');
+}
+
+function setLang(l) {
+  if (LANGS.indexOf(l) < 0) return;
+  LANG = l;
+  try { localStorage.setItem('archi_lang', l); } catch (e) {}
+  renderLangs();
+  render();
+}
+
+renderLangs();
+render();
+</script>
+</body>
+</html>
