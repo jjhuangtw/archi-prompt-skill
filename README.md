@@ -1,30 +1,30 @@
 # archi-prompt skill
 
-**English** · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md)
+**繁體中文** · [English](README.en.md) · [日本語](README.ja.md) · [简体中文](README.zh-CN.md)
 
-An architectural AI prompting skill for Claude. It comes from [archi-prompt.com](https://archi-prompt.com) — a community site holding 4,000+ prompts for architecture, interiors and landscape — and packages the writing method distilled there into a single skill.
+給 Claude 用的建築 AI 提示詞技能。來自 [archi-prompt.com](https://archi-prompt.com) —— 一個累積了四千多則建築、室內、景觀 AI 提示詞的社群平台 —— 把站上整理出來的寫作方法打包成一個 skill。
 
-Once installed, ask Claude for "a prompt for a museum on a hillside" or "turn this SketchUp model into a photoreal render" and it writes to this method instead of piling up adjectives.
+裝上之後,跟 Claude 說「幫我寫一個山坡上美術館的提示詞」或「這張 SU 模型想轉成寫實渲染」,它就會照這套方法寫,而不是堆一串形容詞。
 
-## The core method
+## 核心方法
 
-**AI does not understand architecture through "style". It generates from information priority.**
+**AI 不是依「風格」理解建築,而是依「資訊優先級」生成畫面。**
 
-A model treats whatever opens the prompt as the main subject. Put `golden hour` in the first sentence and the building itself falls apart, because light became the subject of the image. So the prompt is ordered like this:
+模型會把提示詞開頭的東西當成主要資訊。把 `golden hour` 寫在第一句,建築本身就會歪掉,因為模型把光當成了這張圖的主題。所以提示詞照這個順序排:
 
 ```
-Mass → Geometry → Structure → Material → Openings → Spatial organization → Landscape → Lighting → Camera → Rendering
+量體 → 幾何 → 結構 → 材料 → 開口 → 空間組織 → 景觀 → 光線 → 鏡頭 → 算圖
 ```
 
-Retouching runs on the opposite logic: the point is not what to change, but writing down **what must stay exactly as it is** — otherwise the model cheerfully redraws the floor count and the camera angle along the way.
+修圖則是另一套邏輯:重點不是「要改什麼」,而是明寫**「什麼必須保持不變」**,否則模型會順手把樓層數與拍攝角度一起重畫。
 
-## Examples
+## 範例
 
-Every image below was generated from the prompt printed under it, taken as-is from [archi-prompt.com](https://archi-prompt.com) — click a title for the original post. Text-to-image prompts are written in English in the golden order; retouching prompts are written in Chinese and open by pinning down what must not change.
+下面每一張都是 [archi-prompt.com](https://archi-prompt.com) 上的實際成果,提示詞原封不動附在圖下面,點標題可以看原始貼文。文生圖用英文寫、依黃金順序排;修圖用中文寫、開頭先鎖死不准動的東西。
 
-### [Tadao Ando Style · Bare Concrete Museum and Light Gap](https://archi-prompt.com/p/0aa4b2e3-0fef-4c0d-9b48-40213ec700e8)
+### [安藤忠雄風・清水模美術館與光縫](https://archi-prompt.com/p/0aa4b2e3-0fef-4c0d-9b48-40213ec700e8)
 
-`Exterior` · `Text-to-image` · `Grok`
+`建築外觀` · `文生圖` · `Grok`
 
 <img src="https://archi-prompt.com/uploads/gen-0aa4b2e3.webp" width="300" alt="Tadao Ando style concrete museum with a slit skylight and reflecting pool">
 
@@ -34,11 +34,11 @@ skylight casting a moving blade of light on the wall, shallow reflecting pool at
 entrance, single cherry tree, misty dawn, serene photorealistic photography
 ```
 
-Material comes before light, so the result is a building — not a mood shot.
+材料(清水模)排在光線(晨霧)前面,所以出來的是一棟建築,不是一張氣氛照。
 
-### [Zaha Hadid Style · Fluid Curve Performing Arts Center](https://archi-prompt.com/p/ff378a3a-2846-43f3-85ca-01f8444b260d)
+### [Zaha Hadid 風・流動曲面表演藝術中心](https://archi-prompt.com/p/ff378a3a-2846-43f3-85ca-01f8444b260d)
 
-`Exterior` · `Text-to-image` · `GPT Image`
+`建築外觀` · `文生圖` · `GPT Image`
 
 <img src="https://archi-prompt.com/uploads/gen-ff378a3a.webp" width="480" alt="Zaha Hadid style performing arts center with fluid white shell at dusk">
 
@@ -48,11 +48,11 @@ into the plaza, seamless GRC surfaces, ribbon-like glazing, dusk with cool blue 
 warm interior glow, aerial three-quarter view, photorealistic rendering
 ```
 
-A master's name has to land on real mass and material (`fluid white curvilinear shell`, `seamless GRC`); the name alone leaves the model guessing.
+大師風格要落到具體的量體與材料(`fluid white curvilinear shell`、`seamless GRC`),只寫名字模型會亂猜。
 
-### [Taiwanese Street House Renovation · Post-Rain Evening](https://archi-prompt.com/p/6a16d579-8dbe-48f5-8536-475ba054c41d)
+### [台灣街屋改造・雨後傍晚](https://archi-prompt.com/p/6a16d579-8dbe-48f5-8536-475ba054c41d)
 
-`Exterior` · `Text-to-image` · `Grok`
+`建築外觀` · `文生圖` · `Grok`
 
 <img src="https://archi-prompt.com/uploads/gen-6a16d579.webp" width="480" alt="Renovated Taiwanese narrow townhouse with perforated brick screen facade on a rainy evening">
 
@@ -63,11 +63,11 @@ along the street, humid evening atmosphere after rain, overhead power lines, str
 photography, hyperrealistic, nostalgic yet contemporary mood
 ```
 
-Spell out the context — weathered neighbors, scooters, power lines — or the model drops the house into a tidy European street.
+老鄰居、機車、電線這些脈絡要明寫出來,不寫模型會把街屋放進一條乾淨的歐洲街道。
 
-### [SketchUp Model to Realistic Rendering](https://archi-prompt.com/p/780867a0-32e2-4c14-b8e6-8ba2720700dd)
+### [SketchUp 模型轉實景渲染](https://archi-prompt.com/p/780867a0-32e2-4c14-b8e6-8ba2720700dd)
 
-`Exterior` · `Retouch` · `Nano Banana`
+`建築外觀` · `修圖` · `Nano Banana`
 
 <img src="https://archi-prompt.com/uploads/gen-780867a0.webp" width="480" alt="Photoreal architectural photography converted from a SketchUp white model">
 
@@ -77,11 +77,11 @@ Spell out the context — weathered neighbors, scooters, power lines — or the 
 街道與行道樹,整體呈現專業建築攝影質感。
 ```
 
-"Keep the massing, openings and viewpoint exactly the same" comes first — without it, the model redraws the floor count and the camera angle too. Retouching prompts are written in Chinese on purpose: they are instructions, and Nano Banana follows Chinese instructions precisely.
+「量體、開窗位置與視角完全不變」放在最前面 —— 少了這半句,模型會連樓層數跟拍攝角度一起重畫。
 
-### [Axel Vervoordt Style · Wabi-Sabi Country Living Room](https://archi-prompt.com/p/43cd5a79-3311-4187-8741-a25aad452150)
+### [Axel Vervoordt 風・侘寂鄉村客廳](https://archi-prompt.com/p/43cd5a79-3311-4187-8741-a25aad452150)
 
-`Interior` · `Text-to-image` · `GPT Image`
+`室內設計` · `文生圖` · `GPT Image`
 
 <img src="https://archi-prompt.com/uploads/gen-43cd5a79.webp" width="480" alt="Wabi-sabi country living room with lime-washed walls and oak beams">
 
@@ -91,11 +91,11 @@ centuries-old oak beams, low linen sofas, wabi-sabi ceramics on a rustic altar t
 soft window light with painterly shadows, quiet timeless atmosphere, fine art photo
 ```
 
-Interiors live on surface condition — `lime-washed`, `centuries-old oak` — not on adjectives like "cozy".
+室內的重點在材質的表面狀態(`lime-washed`、`centuries-old oak`),不是「溫馨」「有質感」這種感受詞。
 
-### [Piet Oudolf Style · Meadow-Style Public Garden](https://archi-prompt.com/p/5ae02baf-0072-4a9c-9801-3fe752c9a72f)
+### [Piet Oudolf 風・草甸式公共花園](https://archi-prompt.com/p/5ae02baf-0072-4a9c-9801-3fe752c9a72f)
 
-`Landscape` · `Text-to-image` · `GPT Image`
+`景觀設計` · `文生圖` · `GPT Image`
 
 <img src="https://archi-prompt.com/uploads/gen-5ae02baf.webp" width="480" alt="Meadow-style public garden with ornamental grasses in golden autumn backlight">
 
@@ -105,35 +105,35 @@ heads in matrix planting, mown grass path winding through, low golden autumn bac
 frost on textures, immersive naturalistic garden photography
 ```
 
-Landscape needs a planting logic and a route through it (`matrix planting`, `mown grass path`), or you just get handsome weeds.
+景觀要有種植邏輯與動線(`matrix planting`、`mown grass path`),否則只會得到一張漂亮的雜草。
 
-### 4,000+ more
+### 還有四千多則
 
 <table>
 <tr>
-<td width="25%"><a href="https://archi-prompt.com/p/4e6ac053-60a7-42ec-8da4-9d5c6973655c"><img src="https://archi-prompt.com/uploads/gen-4e6ac053.webp" alt="Taiwanese sanheyuan courtyard house"></a><br>Taiwanese sanheyuan</td>
-<td width="25%"><a href="https://archi-prompt.com/p/9426e97f-ad1e-4a95-a378-5445bf3f8cea"><img src="https://archi-prompt.com/uploads/gen-9426e97f.webp" alt="Japanese zen rock garden in morning mist"></a><br>Zen garden, morning mist</td>
-<td width="25%"><a href="https://archi-prompt.com/p/6c366419-bc04-48bd-b7f7-cdfd6cc7f201"><img src="https://archi-prompt.com/uploads/gen-6c366419.webp" alt="Bare shell apartment virtually staged as a modern living room"></a><br>Bare shell → living room</td>
-<td width="25%"><a href="https://archi-prompt.com/p/8fa463b3-6c5e-4932-9a43-25fb5a022a72"><img src="https://archi-prompt.com/uploads/gen-8fa463b3.webp" alt="Facade material swapped from concrete to red brick"></a><br>Facade material swap</td>
+<td width="25%"><a href="https://archi-prompt.com/p/4e6ac053-60a7-42ec-8da4-9d5c6973655c"><img src="https://archi-prompt.com/uploads/gen-4e6ac053.webp" alt="Taiwanese sanheyuan courtyard house"></a><br>台灣三合院・燕尾脊</td>
+<td width="25%"><a href="https://archi-prompt.com/p/9426e97f-ad1e-4a95-a378-5445bf3f8cea"><img src="https://archi-prompt.com/uploads/gen-9426e97f.webp" alt="Japanese zen rock garden in morning mist"></a><br>日式枯山水・晨霧</td>
+<td width="25%"><a href="https://archi-prompt.com/p/6c366419-bc04-48bd-b7f7-cdfd6cc7f201"><img src="https://archi-prompt.com/uploads/gen-6c366419.webp" alt="Bare shell apartment virtually staged as a modern living room"></a><br>毛胚屋轉現代風客廳</td>
+<td width="25%"><a href="https://archi-prompt.com/p/8fa463b3-6c5e-4932-9a43-25fb5a022a72"><img src="https://archi-prompt.com/uploads/gen-8fa463b3.webp" alt="Facade material swapped from concrete to red brick"></a><br>外牆材質替換</td>
 </tr>
 </table>
 
-When your subject already has a close match on the site, the skill pulls one back as a skeleton — faster and more accurate than starting from scratch.
+題材如果站上已經有類似的,skill 會撈一則回來當骨架,比從零開始寫快也準。
 
-## What's inside
+## 內容
 
 | | |
 |---|---|
-| Method | The ten-part golden order, a spatial grammar library, a table of common mistakes |
-| Styles | 34 contemporary styles (architecture / interior / landscape), each with keywords and a full example |
-| Masters | The vocabulary of 32 designers (12 architects, 10 interior, 10 landscape) |
-| History | 44 historical styles, with style-transfer templates |
-| Retouching | Model-to-render, light and time of day, material option comparisons, viewpoint and drawing conversion |
-| Real cases | Find a close match among the 4,000+ prompts on archi-prompt.com and use it as a skeleton |
+| 方法論 | 黃金順序十段結構、空間文法庫、常見錯誤對照 |
+| 風格 | 34 種當代風格(建築/室內/景觀),各有關鍵字與完整範例 |
+| 大師 | 32 位設計師的語彙(建築師 12、室內 10、景觀 10) |
+| 建築史 | 44 種歷史風格,含風格轉換模板 |
+| 修圖 | SU 模型轉渲染、光線與時間、材質方案比較、視角與圖面轉換 |
+| 實例 | 需要時到 archi-prompt.com 上四千多則現成提示詞裡找相近的當骨架 |
 
-## Install
+## 安裝
 
-The same content is packaged three ways. Pick the one that matches your tool.
+同一份內容包成三種入口,依你用的工具選一個。
 
 ### Claude Code
 
@@ -142,27 +142,27 @@ The same content is packaged three ways. Pick the one that matches your tool.
 /plugin install archi-prompt@archi-prompt
 ```
 
-Or drop the whole `plugins/archi-prompt/skills/archi-prompt/` folder into `~/.claude/skills/`.
+或直接把 `plugins/archi-prompt/skills/archi-prompt/` 整個資料夾放到 `~/.claude/skills/` 底下。
 
-### OpenAI Codex, Gemini CLI and other CLI agents
+### OpenAI Codex、Gemini CLI 等 CLI agent
 
-Clone the repo and start your agent inside it — [AGENTS.md](AGENTS.md) in the root is the common convention for these tools, and they read it automatically.
+把這個 repo clone 下來,在裡面開你的 agent 就行 —— 根目錄的 [AGENTS.md](AGENTS.md) 是這類工具的通用慣例,它會自動讀。
 
 ```bash
 git clone https://github.com/jjhuangtw/archi-prompt-skill.git
 cd archi-prompt-skill
 ```
 
-### Custom GPTs on ChatGPT, Gems on Gemini
+### ChatGPT 的 Custom GPT、Gemini 的 Gem
 
-Neither product has a file system, so nothing can be "read only when needed". The content is flattened into two files under [portable/](portable/): paste `instructions.md` into the instructions field and upload `knowledge.md` as knowledge. Setup steps are in [portable/README.md](portable/README.md).
+那兩個產品沒有檔案系統,沒辦法「要用才去讀某一份參考檔」,所以內容攤平成兩個檔案放在 [portable/](portable/):`instructions.md` 貼進指示欄位,`knowledge.md` 當知識庫上傳。設定步驟見 [portable/README.md](portable/README.md)。
 
 ---
 
-The files under `portable/` are generated from the skill sources by `node scripts/build-portable.mjs` — don't edit them directly. Change `plugins/archi-prompt/skills/archi-prompt/` and regenerate.
+`portable/` 底下的檔案由 `node scripts/build-portable.mjs` 從 skill 原始檔產生,不要直接編輯。改內容請改 `plugins/archi-prompt/skills/archi-prompt/` 之後重新產生。
 
-## License
+## 授權
 
-[MIT](LICENSE) — free to use, modify and use commercially. A credit to [archi-prompt.com](https://archi-prompt.com) is appreciated when it helps.
+[MIT](LICENSE) —— 可自由使用、修改、商業利用。用得上的話,歡迎順手提一下出處 [archi-prompt.com](https://archi-prompt.com)。
 
-Prompts submitted by members of the site are not part of what this repo packages; only the methodology and style vocabulary compiled by the site are here. Anything quoted from the site belongs to its author — treat it as reference and structure, not as something to paste wholesale and call your own.
+站上會員投稿的提示詞不在本 repo 的打包範圍內,這裡只有站方自行整理的方法論與風格字彙。從站上引用到的內容屬於原作者,請當作參考與骨架,不要整段照抄後宣稱是自己寫的。

@@ -1,6 +1,6 @@
 # archi-prompt skill
 
-[English](README.md) · [繁體中文](README.zh-TW.md) · **日本語** · [简体中文](README.zh-CN.md)
+[繁體中文](README.md) · [English](README.en.md) · **日本語** · [简体中文](README.zh-CN.md)
 
 Claude 用の建築 AI プロンプトスキル。建築・インテリア・ランドスケープのプロンプトを4,000件以上蓄積したコミュニティサイト [archi-prompt.com](https://archi-prompt.com) から、そこで整理された書き方をひとつの skill にまとめたもの。
 
