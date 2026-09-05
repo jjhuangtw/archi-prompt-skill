@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [English](README.en.md) · [日本語](README.ja.md) · **简体中文**
 
-给 Claude 用的建筑 AI 提示词技能。来自 [archi-prompt.com](https://archi-prompt.com) —— 一个累积了四千多则建筑、室内、景观 AI 提示词的社区平台 —— 把站上整理出来的写作方法打包成一个 skill。
+给 Claude 用的建筑 AI 提示词技能。来自 [archi-prompt.com](https://archi-prompt.com) —— 一个累积了八千多则建筑、室内、景观 AI 提示词的社区平台 —— 把站上整理出来的写作方法打包成一个 skill。
 
 装上之后,跟 Claude 说「帮我写一个山坡上美术馆的提示词」或「这张 SU 模型想转成写实渲染」,它就会照这套方法写,而不是堆一串形容词。
 
@@ -107,7 +107,7 @@ frost on textures, immersive naturalistic garden photography
 
 景观要有种植逻辑与动线(`matrix planting`、`mown grass path`),否则只会得到一张漂亮的杂草。
 
-### 还有四千多则
+### 还有八千多则
 
 <table>
 <tr>
@@ -129,7 +129,7 @@ frost on textures, immersive naturalistic garden photography
 | 大师 | 32 位设计师的语汇(建筑师 12、室内 10、景观 10) |
 | 建筑史 | 44 种历史风格,含风格转换模板 |
 | 修图 | SU 模型转渲染、光线与时间、材质方案比较、视角与图面转换 |
-| 实例 | 需要时到 archi-prompt.com 上四千多则现成提示词里找相近的当骨架 |
+| 实例 | 需要时到 archi-prompt.com 上八千多则现成提示词里找相近的当骨架 |
 
 ## 安装
 
