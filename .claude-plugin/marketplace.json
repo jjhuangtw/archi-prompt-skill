@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "archi-prompt",
-      "description": "寫建築、室內、景觀的 AI 生圖與修圖提示詞:黃金順序方法、34 種風格、32 位大師、44 種建築史風格、修圖工作流,並可即時查詢 archi-prompt.com 上四千多則實例。",
+      "description": "寫建築、室內、景觀的 AI 生圖與修圖提示詞:黃金順序方法、34 種風格、32 位大師、44 種建築史風格、修圖工作流,並可即時查詢 archi-prompt.com 上八千多則實例。",
       "author": {
         "name": "jjhuang"
       },

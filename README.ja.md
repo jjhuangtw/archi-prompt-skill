@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · [English](README.en.md) · **日本語** · [简体中文](README.zh-CN.md)
 
-Claude 用の建築 AI プロンプトスキル。建築・インテリア・ランドスケープのプロンプトを4,000件以上蓄積したコミュニティサイト [archi-prompt.com](https://archi-prompt.com) から、そこで整理された書き方をひとつの skill にまとめたもの。
+Claude 用の建築 AI プロンプトスキル。建築・インテリア・ランドスケープのプロンプトを8,000件以上蓄積したコミュニティサイト [archi-prompt.com](https://archi-prompt.com) から、そこで整理された書き方をひとつの skill にまとめたもの。
 
 インストールしたあと、Claude に「丘の上の美術館のプロンプトを書いて」「この SketchUp モデルをフォトリアルなレンダリングにしたい」と頼めば、形容詞を並べるのではなく、この方法に沿って書く。
 
@@ -107,7 +107,7 @@ frost on textures, immersive naturalistic garden photography
 
 ランドスケープには植栽のロジックと動線が要る(`matrix planting`、`mown grass path`)。なければ、見栄えのいい雑草にしかならない。
 
-### ほかにも4,000件以上
+### ほかにも8,000件以上
 
 <table>
 <tr>
@@ -129,7 +129,7 @@ frost on textures, immersive naturalistic garden photography
 | 巨匠 | 32人のデザイナーの語彙(建築12、インテリア10、ランドスケープ10) |
 | 建築史 | 44の歴史様式、スタイル変換テンプレートつき |
 | レタッチ | モデルからレンダリングへ、光と時間帯、素材案の比較、視点と図面の変換 |
-| 実例 | archi-prompt.com の4,000件以上から近いものを探して骨組みに使う |
+| 実例 | archi-prompt.com の8,000件以上から近いものを探して骨組みに使う |
 
 ## インストール
 

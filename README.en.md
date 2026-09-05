@@ -2,7 +2,7 @@
 
 [繁體中文](README.md) · **English** · [日本語](README.ja.md) · [简体中文](README.zh-CN.md)
 
-An architectural AI prompting skill for Claude. It comes from [archi-prompt.com](https://archi-prompt.com) — a community site holding 4,000+ prompts for architecture, interiors and landscape — and packages the writing method distilled there into a single skill.
+An architectural AI prompting skill for Claude. It comes from [archi-prompt.com](https://archi-prompt.com) — a community site holding 8,000+ prompts for architecture, interiors and landscape — and packages the writing method distilled there into a single skill.
 
 Once installed, ask Claude for "a prompt for a museum on a hillside" or "turn this SketchUp model into a photoreal render" and it writes to this method instead of piling up adjectives.
 
@@ -107,7 +107,7 @@ frost on textures, immersive naturalistic garden photography
 
 Landscape needs a planting logic and a route through it (`matrix planting`, `mown grass path`), or you just get handsome weeds.
 
-### 4,000+ more
+### 8,000+ more
 
 <table>
 <tr>
@@ -129,7 +129,7 @@ When your subject already has a close match on the site, the skill pulls one bac
 | Masters | The vocabulary of 32 designers (12 architects, 10 interior, 10 landscape) |
 | History | 44 historical styles, with style-transfer templates |
 | Retouching | Model-to-render, light and time of day, material option comparisons, viewpoint and drawing conversion |
-| Real cases | Find a close match among the 4,000+ prompts on archi-prompt.com and use it as a skeleton |
+| Real cases | Find a close match among the 8,000+ prompts on archi-prompt.com and use it as a skeleton |
 
 ## Install
 
